@@ -1,6 +1,11 @@
  Xmln←{ ⍝ XML -> JSON object
      obj arr char←1 2 4 ⍝ JSON types
      (d k v a t)←↓⍉⎕XML ⍵
+     (d k v t)←{
+         ak av←↓⍉↑⊃,/↓¨(0<⍵)/a
+         i←⍋(⍳≢d),⍸⍵
+         ((d,1+d[⍸⍵])[i])((k,ak)[i])((v,av)[i])((t,obj char[1+×∊⍴¨av])[i])
+     }≢¨a
      d+←1 ⋄ ((t∊1 3 7)/t)←obj ⋄ ((t∊5)/t)←char ⋄ (((⊂'')⍷v)/v)←⊂⍬ ⍝ pre-processing ; see: ]help ⎕XML ⎕JSON
      n←⊃,/2{↑{⊂⍺ ⍵}⌸⍨/↓⍉1↓⍵,∘(⌊/)⌸⍺}/↓⌈\(⍋d)@⊢(∪d)∘.=d ⍝ parent | children pairs
      (p c)←↓⍉↑n
