@@ -30,9 +30,9 @@
      d[idx]+←1
      d[∊(p∊idx)/c]+←1
      i←⍋(⍳≢k),idx-1
-     v ← (v,(≢i)⍴⊂⍬)[i]
-     d ← (d,d[idx]-1)[i]
-     k ← (k,(≢i)⍴⊂'')[i]
-     t ← (t,(≢i)⍴1)[i]
+     v←v(i I)(≢i)⍴⊂⍬
+     d←d(i I)d[idx]-1
+     k←k(i I)(≢i)⍴⊂''
+     t←t(i I)(≢i)⍴1
      ⎕JSON 1 ⎕JSON⍠'M'⍉↑d k v t
  }
