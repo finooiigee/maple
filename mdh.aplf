@@ -8,10 +8,12 @@ mdh ← {
   }
   Literal ← (,¨'<' '>')⎕R'&lt;' '&gt;'⍠('Regex' 0)
 
+  html ← '^#include(.*)' _R_ { ⊃⎕NGET ¯1↓1↓'('(≠⊆⊢)⍵ } ⍵
+
   html ← '^(#{1,6}\s*).*' _R_ {
     (prfx title)←⍵⊂⍨≠∧\'#'=⍵
     ('h',⍕≢prfx) Tag Trim title
-  } _Ignore ⍵
+  } _Ignore html
 
   html ← '\[(.*?)\]\(.*?\)' _R_ {
     (alias href)←']('(((0=⊢∨¯1⌽⊢)⍷)⊆⊢)¯1↓1↓⍵
