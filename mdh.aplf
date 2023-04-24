@@ -31,8 +31,17 @@ mdh ← {
   html ← '^([^\<\s]|<code|<a).*(\n([^\<\s]|<code|<a).*)*' _R_ {
     'p' Tag ⍵
   } _Ignore html
+
   html ← '`[\s\S]+?`' _R_ ({'code' Tag ¯1↓1↓⍵ } Literal) _Ignore html
-  html ← '^```([\s\S]+?)^```' _R_ ({'pre' Tag∊ {∨/'apl'⍷∊1↑⍵: wtokc 1↓⍵ ⋄ 1↓⍵}¯1↓⍵⊂⍨1,2≠/nl≠⍵} Literal) html
+
+  html ← '^```([\s\S]+?)^```' _R_ ({
+    'pre' Tag {
+      ∨/'apl'⍷∊1↑⍵: '<span.+?>.+?<\/span>' _R_ {
+        ∊Literal¨@{0 1 0}⍵⊂⍨1,2≠/(∨\⌽<\'<'=⌽⍵)∨(≠\∨⊢)(<\'>'=⍵)∨'<span'⍷⍵
+      } ∊wtokc 1↓⍵
+      Literal ∊1↓⍵
+    }¯1↓⍵⊂⍨1,2≠/nl≠⍵
+  }) html
 
   html
 }
