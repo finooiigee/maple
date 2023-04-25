@@ -1,0 +1,7 @@
+graphf ← { ⍝ Graph of directory (.dot)
+  nodes ← ⊃⎕NINFO⍠1⍠'Recurse' 1
+  (p c) ← ↓⍉↑ ⊃,/{2{⍺ ⍵}/'/'(≠⊆⊢)⍵}¨0 nodes './*.md'
+  c   ← (⊃¯1↓'.'(≠⊆⊢))¨c
+  rlt ← p{⊂(('.'(~∊)⊃⍺)/⍺,'->'),(1↓,',',⍪∪⍵),';'}⌸c
+  'digraph {',(∊rlt),'}'
+}
