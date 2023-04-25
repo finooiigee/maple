@@ -1,4 +1,4 @@
-mdh ← {
+mdx ← {
   nl      ← ⎕JSON '"\n"'
   Tag     ← {'<',⍺,'>',⍵,'</',⍺,'>'}
   Trim    ← {(∨\' '≠⍵)/⍵}
@@ -28,7 +28,7 @@ mdh ← {
     }¨(⍸⌊/=⊢)d
   } _Ignore html
 
-  html ← '^([^\<\s]|<code|<a).*(\n([^\<\s]|<code|<a).*)*' _R_ {
+  html ← '^([^\<\s]|<code|<a|[ ]).*(\n([^\<\s]|<code|<a|[ ]).*)*' _R_ {
     'p' Tag ⍵
   } _Ignore html
 
@@ -36,7 +36,7 @@ mdh ← {
 
   html ← '^```([\s\S]+?)^```' _R_ ({
     'pre' Tag {
-      ∨/'apl'⍷∊1↑⍵: '''(.*?('''')?.*?)''' _R_ {Literal ⍵} ∊#.analysis.wtokc 1↓⍵
+      ∨/'apl'⍷∊1↑⍵: '''(.*?('''')?.*?)''' _R_ {Literal ⍵} ∊wtokc 1↓⍵
       Literal ∊1↓⍵
     }¯1↓⍵⊂⍨1,2≠/nl≠⍵
   }) html
