@@ -5,9 +5,13 @@ Returns a JSON object from XML.
       html ⍝ XHTML-compatible HTML
 <html>
   <body>
-    <span style="font-weight:bold;">Hello, World!</span>
-    <h1>Lorem,<br /></h1>
-    <h1>Ipsum! </h1>
+    <div style="display:inline-block;" class="container">
+      <span style="color:red;">
+        Lorem Ipsum!
+      </span>
+    </div>
+    <h1 style="text-align:right;">Hello,</h1>
+    <h1                          >World!</h1>
   </body>
 </html>
 
@@ -16,21 +20,23 @@ Returns a JSON object from XML.
   "html": {
     "body": [
       {
-        "span": [
-          "Hello, World!",
-          {
-            "style": "font-weight:bold;"
-          }
-        ]
-      },
-      {
-        "h1": {
-          "br": {},
-          "": "Lorem,"
+        "div": {
+          "class": "container",
+          "span": {
+            "style": "color:red;",
+            "value": "Lorem Ipsum!"
+          },
+          "style": "display:inline-block;"
         }
       },
       {
-        "h1": "Ipsum!"
+        "h1": {
+          "style": "text-align:right;",
+          "value": "Hello,"
+        }
+      },
+      {
+        "h1": "World!"
       }
     ]
   }
