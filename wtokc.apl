@@ -3,9 +3,7 @@ wtokc ← { ⍝ www token colouring
   cc      ← 200⌶⍵   ⍝  colour codes
   split   ← (1,2≠/⊣)⊂⊢
   keys    ← v[d⍳,¨'SCOL_DFN_NAME' 'MINI_NC' 'MINI_CC' 'MINI_PRIMITIVE' 'MINI_COMMENT' 'SCOL_LAMP' 'MINI_META' 'MINI_IDIOM' '{' '}']
-  colours ← 'rgb(130,165,150)' 'rgb(210,135,155)' 'rgb(80,140,140 )' 'rgb(220,110,70 )'
-  colours,← 'rgb(125,110,100)' 'rgb(125,110,100)' 'rgb(190,170,150)' 'rgb(150,185,115)'  
-  colours,← 'rgb(210,135,155)' 'rgb(210,135,155)'
+  classes ← 'identifier' 'array' 'character' 'primitive' 'comment' 'comment' 'symbol' 'idiom' 'brace' 'brace'
 
   cc {
     grade ← ⍺⍳⍨,keys
@@ -14,8 +12,9 @@ wtokc ← { ⍝ www token colouring
     mask  ← ∧/¨grade split ⍺∊keys
     toks  ← grade split ⍵
     (mask/toks) ← ((idx∧1,2≠/⍺)/grade) {
-      '<span style="color:',(⍺⊃colours),'">',⍵,'</span>'
+      '<span class="',(⍺⊃classes),'">',⍵,'</span>'
     }¨mask/toks
     toks
   }¨ ⍵
+
 }
