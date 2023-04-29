@@ -28,7 +28,7 @@ mdx ← {
     }¨(⍸⌊/=⊢)d
   } _Ignore html
 
-  html ← '^([^\<\s]|<code|<a|[ ]).*(\n([^\<\s]|<code|<a|[ ]).*)*' _R_ {
+  html ← '^([^\<\s]|<code|<a|[ ]+\S).*(\n([^\<\s]|<code|<a|[ ]+\S).*)*' _R_ {
     'p' Tag ⍵
   } _Ignore html
 
