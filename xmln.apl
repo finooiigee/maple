@@ -18,11 +18,10 @@ Xmln←{
 
   p c ← ↓⍉↑⊃,/2{↑{⊂⍺ ⍵}⌸⍨/↓⍉1↓⍵,∘(⌊/)⌸⍺}/↓⌈\(⍋d)@⊢(∪d)∘.=d
   msk←{0∊≠k[⍵]}¨c
-  (t[msk/p])←arr
+  t[msk/p]←arr
   idx←∊msk/c
-  d[{⍵∪∊(p∊⍵)/c}⍣≡∊(p∊idx)/c]+←1
-  d[idx]+←1
+  d[{⍵∪∊(p∊⍵)/c}⍣≡idx]+←1
   i←⍋(⍳≢k),idx-1
-  d k v t (i I,)← (⊂d[idx]-1),(≢i)⍴¨(⊂'') (⊂⍬) 1
+  d k v t (i I,)← (⊂d[idx]-1) , (≢i) ⍴∘⊂¨ '' ⍬ 1
   ⎕JSON 1 ⎕JSON⍠'M'⍉↑d k v t
 }
